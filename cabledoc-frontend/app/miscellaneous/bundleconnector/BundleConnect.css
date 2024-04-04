@@ -1,0 +1,47 @@
+.connection-visualization {
+  margin-top: 20px;
+
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: linear-gradient(
+    to right,
+    #f0f0f0 50%,
+    #d3d3d3 50%
+  ); /* Halb hellgrau, halb dunkelgrau */
+}
+
+.connection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.connection span {
+  width: 60px; /* Breite des Kreises */
+  height: 60px; /* Höhe des Kreises */
+  padding: 18px;
+  border: 1px solid #ccc;
+  border-radius: 50%; /* Macht das Element kreisförmig */
+  margin-right: 5px; /* Abstand zwischen den Kreisen */
+  margin-left: 5px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.form-section {
+  flex: 1;
+}
+
+.divider {
+  width: 2px;
+  background-color: #393232;
+  height: 100%;
+  margin: 0 20px;
+}

@@ -1,0 +1,22 @@
+.custom-tooltip {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: rgba(33, 37, 41, 0.8); /* Dunkelgrauer Hintergrund mit Transparenz */
+    border-radius: 8px; /* Abgerundete Ecken */
+    color: white;
+    padding: 10px;
+  }
+  
+  .custom-tooltip.show {
+    opacity: 1;
+  }
+  
+  .custom-tooltip.hide {
+    opacity: 0;
+  }
+  
+  /* Optional: Stil für den Pfeil des Tooltips */
+  .custom-tooltip .arrow::before {
+    border-top-color: rgba(33, 37, 41, 0.8); /* Farbe des Pfeils anpassen */
+  }
+  

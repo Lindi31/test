@@ -1,0 +1,58 @@
+body {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+#sidebar,
+#navbar {
+  background-color: #ffffff;
+  border-color: #e5e7eb;
+  border-style: solid;
+  border-width: 0px 1px 1px 1px;
+}
+#sidebar a:hover,
+#navbar a:hover,
+#sidebar button:hover,
+#navbar button:hover {
+  color: #18181b;
+}
+.dropdown-menu {
+  overflow: hidden;
+  transition:
+    max-height 0.52s ease-out,
+    opacity 0.72s;
+  max-height: 0;
+  opacity: 0;
+}
+
+.dropdown-menu.open {
+  max-height: 500px;
+  transition: max-height 0.65s ease-in; /* Stelle diesen Wert entsprechend der maximalen Höhe deines Dropdowns ein */
+  opacity: 1;
+}
+#content > div {
+  height: 100%;
+}
+
+/* Dark THEME */
+body.body-root {
+  background-color: #1d2125;
+}
+.dark {
+  /* @apply text-white bg-gray-900 */
+  background-color: #1d2125;
+  color: #ffffff;
+}
+.dark #sidebar,
+.dark #navbar {
+  /* @apply bg-gray-800 border border-t-0 border-gray-600*/
+  background-color: #2a2b36;
+  border-color: #40414c;
+  border-style: solid;
+  border-width: 0px 1px 1px 1px;
+}
+.dark #sidebar a:hover,
+.dark #navbar a:hover,
+.dark #sidebar button:hover,
+.dark #navbar button:hover {
+  color: #d1d5db;
+}

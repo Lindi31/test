@@ -1,0 +1,49 @@
+.skeleton-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.skeleton-table {
+  width: 100%;
+}
+
+.skeleton-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.skeleton-cell {
+  background: linear-gradient(270deg, #b0b0b0, #909090, #b0b0b0);
+  background-size: 200% 100%;
+  animation: loadingAnimation 1.2s infinite linear;
+  border-radius: 4px;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-cell.id {
+  width: 5%;
+}
+.skeleton-cell.name,
+.skeleton-cell.email,
+.skeleton-cell.username {
+  width: 15%;
+}
+.skeleton-cell.initials,
+.skeleton-cell.active,
+.skeleton-cell.phone {
+  width: 10%;
+}
+.skeleton-cell.actions {
+  width: 20%;
+}
+
+/* Passen Sie die Breiten nach Ihrem Tabellenlayout an */
