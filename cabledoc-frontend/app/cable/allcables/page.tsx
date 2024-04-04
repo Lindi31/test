@@ -1,27 +1,24 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import ReactTable from "@/pages/pages/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
+import ReactTable from "@/components/ownui/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
 import { fetchCables } from "@/app/api/cableApi"; // Importieren Sie die Funktion getCables, um Kabel abzurufen
 import { User } from "@/app/api/user";
 import { createColumnHelper } from "@tanstack/react-table";
-import { Card } from "@/components/ui/card";
-import LoadingSkeleton from "@/pages/components/LoadingIndicator";
-import { cn } from "@/lib/utils";
+import LoadingSkeleton from "@/components/pastui/LoadingIndicator";
 import { CardContent } from "@mui/material";
 import { Toaster } from "react-hot-toast";
-import { cardStyleInner } from "@/pages/components/Layout/tailwindStyles";
-interface AllUserProps {
-  user: User;
-}
+import { cardStyleInner } from "@/app/sidebar/tailwindStyles";
+import { useUser } from "@/app/api/usercontext";
 
-const AllCables: React.FC<AllUserProps> = ({ user }) => {
+const AllCables = () => {
   const [cables, setCables] = useState([]); // State für die Kabel initialisieren
   const [loading, setLoading] = useState(true); // State für den Ladezustand hinzufügen
+  const { user, setUser } = useUser();
 
   useEffect(() => {
     async function fetchCable() {
       try {
-        const cablesData = await fetchCables(user);
+        const cablesData = await fetchCables(user!);
         setCables(cablesData);
         setLoading(false); // Ladezustand auf false setzen, wenn Daten erfolgreich geladen wurden
       } catch (error) {

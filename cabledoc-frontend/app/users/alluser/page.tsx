@@ -1,28 +1,27 @@
 // Importing necessary hooks and components from React, Next.js, and other libraries
 "use client";
 import { createColumnHelper } from "@tanstack/react-table";
-import ReactTable from "@/pages/pages/table/ReactTable"; // Adjust import paths as necessary
-import Action from "@/pages/components/Action"; // Adjust import paths as necessary
-import Modal, { ModalData } from "@/pages/components/Modal"; // Adjust import paths as necessary
+import ReactTable from "@/components/ownui/table/ReactTable"; // Adjust import paths as necessary
+import Action from "@/components/pastui/Action"; // Adjust import paths as necessary
+import Modal, { ModalData } from "@/components/pastui/Modal"; // Adjust import paths as necessary
 import { useEffect, useState } from "react";
-import { getUsers } from "../../../pages/model/User";
+import { getUsers } from "../../../model/User";
 import { User } from "../../api/user";
 import { Skeleton } from "@/components/ui/skeleton";
-import LoadingSkeleton from "@/pages/components/LoadingIndicator";
+import LoadingSkeleton from "@/components/pastui/LoadingIndicator";
 import { Toaster } from "react-hot-toast";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import { cardStyleInner } from "@/pages/components/Layout/tailwindStyles";
-interface AllUserProps {
-  user: User;
-}
+import { cn } from "@/util/lib/utils";
+import { cardStyleInner } from "@/app/sidebar/tailwindStyles";
+import { useUser } from "@/app/api/usercontext";
 
-const AllUser: React.FC<AllUserProps> = ({ user }) => {
+const AllUser = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalOptions, setModalOptions] = useState<ModalData>({
     id: 0 /* oder ein sinnvoller Standardwert */,
   });
-  const [users, setUsers] = useState<User | null>(null);
+  const { user, setUser } = useUser();
+
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -30,10 +29,10 @@ const AllUser: React.FC<AllUserProps> = ({ user }) => {
 
     const fetchUser = async () => {
       try {
-        const response = await getUsers(user);
+        const response = await getUsers(user!);
         // Check if the component is still mounted before setting state
         if (active) {
-          setUsers(response);
+          setUser(response);
           setLoading(false);
         }
       } catch (error) {
@@ -146,7 +145,7 @@ const AllUser: React.FC<AllUserProps> = ({ user }) => {
 
   if (loading) return <LoadingSkeleton />;
 
-  if (!users) return <p>x</p>;
+  if (!user) return <p>x</p>;
   const renderLoadingSkeleton = () => (
     <div className="p-2">
       {/* Hier kannst du so viele Skeleton-Komponenten rendern, wie du für die Ladeanzeige benötigst */}
@@ -183,7 +182,7 @@ const AllUser: React.FC<AllUserProps> = ({ user }) => {
             ) : (
               <>
                 <CardContent className="p-3 self-center items-center">
-                  <ReactTable data={users} columns={columns} />
+                  <ReactTable data={user} columns={columns} />
                 </CardContent>
               </>
             )}

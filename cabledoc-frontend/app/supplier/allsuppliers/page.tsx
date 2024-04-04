@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import ReactTable from "@/pages/pages/table/ReactTable"; // Stellen Sie sicher, dass Ihr Pfad korrekt ist
-import { useRouter } from "next/router";
+import ReactTable from "@/components/ownui/table/ReactTable"; // Stellen Sie sicher, dass Ihr Pfad korrekt ist
 import { User } from "@/app/api/user";
-import { cardStyleInner } from "@/pages/components/Layout/tailwindStyles";
-import Action from "@/pages/components/Action";
-import Modal, { ModalData } from "@/pages/components/Modal";
+import { cardStyleInner } from "@/app/sidebar/tailwindStyles";
+import Action from "@/components/pastui/Action";
+import Modal, { ModalData } from "@/components/pastui/Modal";
 import toast, { Toaster } from "react-hot-toast";
 import {
   Lieferant,
@@ -15,28 +14,24 @@ import {
   deleteLieferant,
   getLieferanten,
   localizeLieferantenKey,
-} from "@/pages/model/Lieferant";
-import { Card, CardContent } from "@/components/ui/card";
-import LoadingSkeleton from "@/pages/components/LoadingIndicator";
-import { cn } from "@/lib/utils";
-import { getUsers } from "@/pages/model/User";
+} from "@/model/Lieferant";
+import { CardContent } from "@/components/ui/card";
+import LoadingSkeleton from "@/components/pastui/LoadingIndicator";
+import { useUser } from "@/app/api/usercontext";
 
-interface AllSupplierProps {
-  user: User;
-}
-
-const AllLieferanten: React.FC<AllSupplierProps> = ({ user }) => {
+const AllLieferanten = () => {
   const [lieferanten, setLieferanten] = useState<Lieferanten | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalOptions, setModalOptions] = useState<ModalData>({});
+  const { user, setUser } = useUser();
 
   useEffect(() => {
     let active = true;
 
     const fetch = async () => {
       try {
-        const lieferanten = await getLieferanten(user);
+        const lieferanten = await getLieferanten(user!);
 
         if (!active) {
           return;
@@ -82,7 +77,7 @@ const AllLieferanten: React.FC<AllSupplierProps> = ({ user }) => {
   };
 
   const handleDelete = async () => {
-    const result = await deleteLieferant(user, modalOptions["id"] as number);
+    const result = await deleteLieferant(user!, modalOptions["id"] as number);
     console.log(result);
     if (result.type === "success") {
       toast.success(`Item with ID ${modalOptions.id} is deleted`);

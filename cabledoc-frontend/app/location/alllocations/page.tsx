@@ -1,36 +1,27 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import ReactTable from "@/pages/pages/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
+import React, { useEffect, useMemo, useState } from "react";
+import ReactTable from "@/components/ownui/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
 import { fetchLocations } from "@/app/api/cableApi"; // Importieren Sie die Funktion getLocations, um Kabel abzurufen
 import { User } from "@/app/api/user";
 import { createColumnHelper } from "@tanstack/react-table";
-import { Locateable } from "@/pages/model/Location";
-import { formatDate } from "@/pages/ressources/functions";
-import { Card, CardContent } from "@/components/ui/card";
-import LoadingSkeleton from "@/pages/components/LoadingIndicator";
-import { cn } from "@/lib/utils";
+import { Locateable } from "@/model/Location";
+import { formatDate } from "@/util/ressources/functions";
+import { CardContent } from "@/components/ui/card";
+import LoadingSkeleton from "@/components/pastui/LoadingIndicator";
 import { Toaster } from "react-hot-toast";
-import { cardStyleInner } from "@/pages/components/Layout/tailwindStyles";
-interface AllUserProps {
-  user: User;
-}
-
-const AllLocations: React.FC<AllUserProps> = ({ user }) => {
+import { cardStyleInner } from "@/app/sidebar/tailwindStyles";
+import { useUser } from "@/app/api/usercontext";
+const AllLocations = () => {
   const [locations, setLocations] = useState([]); // State für die Kabel initialisieren
   const [loading, setLoading] = useState(true); // State für den Ladezustand hinzufügen
+  const { user, setUser } = useUser();
 
   // Daten abrufen, wenn die Komponente montiert wird
   useEffect(() => {
     async function fetchCable() {
       try {
         // Hier die Logik einfügen, um Kabel abzurufen, z.B. getLocations-Funktion aufrufena
-        const locationsData = await fetchLocations(user); // Annahme: getLocations gibt die Kabeldaten zurück
+        const locationsData = await fetchLocations(user!); // Annahme: getLocations gibt die Kabeldaten zurück
         setLocations(locationsData);
         setLoading(false); // Kabeldaten im State setzen
       } catch (error) {

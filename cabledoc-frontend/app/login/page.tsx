@@ -5,7 +5,6 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast, { Toaster } from "react-hot-toast";
-import Image from "next/image";
 
 // Import Zustand store and utilities
 import { useUserStore } from "../../app/api/user"; // Adjust path as necessary

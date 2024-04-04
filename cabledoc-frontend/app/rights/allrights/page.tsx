@@ -1,32 +1,25 @@
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import ReactTable from "@/pages/pages/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
+import React, { useEffect, useState } from "react";
+import ReactTable from "@/components/ownui/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
 import { User } from "@/app/api/user";
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { Right, getRights, localizeRightKey } from "@/pages/model/Right";
+import { Right, getRights, localizeRightKey } from "@/model/Right";
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-interface AllUserProps {
-  user: User;
-}
+import { cn } from "@/util/lib/utils";
+import { useUser } from "@/app/api/usercontext";
 
-const AllCables: React.FC<AllUserProps> = ({ user }) => {
+const AllCables = () => {
   const [cables, setCables] = useState([]); // State für die Kabel initialisieren
   console.log(cables);
+  const { user, setUser } = useUser();
 
   // Daten abrufen, wenn die Komponente montiert wird
   useEffect(() => {
     async function fetchCable() {
       try {
         // Hier die Logik einfügen, um Kabel abzurufen, z.B. getCables-Funktion aufrufena
-        const cablesData = await getRights(user); // Annahme: getCables gibt die Kabeldaten zurück
+        const cablesData = await getRights(user!); // Annahme: getCables gibt die Kabeldaten zurück
         setCables(cablesData); // Kabeldaten im State setzen
       } catch (error) {
         console.error("Error fetching cables:", error);

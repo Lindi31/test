@@ -39,7 +39,7 @@ const products = [
   },
   {
     id: "4",
-    name: "Nirav Joshi",
+    name: "Tom Bauer",
     post: "Frontend Engineer",
     pname: "Hosting Press HTML",
     priority: "Critical",
