@@ -12,7 +12,7 @@ import { useUser } from "@/app/api/usercontext";
 const AllCables = () => {
   const [cables, setCables] = useState([]); // State für die Kabel initialisieren
   console.log(cables);
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   // Daten abrufen, wenn die Komponente montiert wird
   useEffect(() => {

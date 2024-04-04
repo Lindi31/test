@@ -5,7 +5,6 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import BarChart from "../../components/pastui/BarChart";
 import PieChart from "../../components/pastui/PieChart";
 import {
-  cardHeaderColorPrimary,
   cardHeaderColorSecondary,
   cardHeaderThird,
 } from "../sidebar/tailwindStyles";
@@ -20,6 +19,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import TopPayingClients from "@/components/traffic";
+import Image from "next/image";
 
 // Importieren Sie die Methode zur Abfrage des eingeloggten Benutzers
 
@@ -78,10 +78,10 @@ export default function HomePage({ minimizedSidebar }: HomeProps) {
                     <CardContent className="flex aspect-square items-center justify-center p-6">
                       <span className="text-4xl font-semibold">
                         {index % 2 === 0 ? ( // Wenn der Index gerade ist
-                          <img src="/img/CDLogo-big.svg" alt="logo" />
+                          <Image src="/img/CDLogo-big.svg" alt="logo" />
                         ) : (
                           // Wenn der Index ungerade ist
-                          <img src="/img/CDLogo-small.svg" alt="logo" />
+                          <Image src="/img/CDLogo-small.svg" alt="logo" />
                         )}
                       </span>
                     </CardContent>

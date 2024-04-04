@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ReactTable from "@/components/ownui/table/ReactTable"; // Stellen Sie sicher, dass der Dateipfad korrekt ist
 import { fetchLocations } from "@/app/api/cableApi"; // Importieren Sie die Funktion getLocations, um Kabel abzurufen
-import { User } from "@/app/api/user";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Locateable } from "@/model/Location";
 import { formatDate } from "@/util/ressources/functions";
@@ -14,7 +13,7 @@ import { useUser } from "@/app/api/usercontext";
 const AllLocations = () => {
   const [locations, setLocations] = useState([]); // State für die Kabel initialisieren
   const [loading, setLoading] = useState(true); // State für den Ladezustand hinzufügen
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   // Daten abrufen, wenn die Komponente montiert wird
   useEffect(() => {
